@@ -15,6 +15,8 @@ Implementing repository patterns for integration of database.
    3. __datasources__ (Definir las reglas de negocio de las cueles se van a regir la obtencion de los datos. Son Abstracciones, no son implementaciones)
    4. __repositories__ (Son los que se van a comunicar con nuestros datasources. Son Abstracciones, no son implementaciones)
 3. __infrastructure__ (Le gusta crearla al Profesor - Y esta carpeta represena un punto intermedio entra __domain__ y __presentation__. Aquí creamos las implementaciones de los datasources, de los repositories, los mappers)
+   1. __datasources__ (En esta carpeta crearmos las implementaciones de los datasources)
+   2. __repositories__ ()
 
 
 
