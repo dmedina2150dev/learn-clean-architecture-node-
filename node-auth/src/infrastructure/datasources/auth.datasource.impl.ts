@@ -25,7 +25,7 @@ export class AuthDatasourceImpl implements AuthDatasource {
 
             // 1. Verificar si existe correo en base de datos
             const existEmail = await UserModel.findOne({ email: email });
-            if (existEmail) throw CustomError.badRequest(`User ${email} already`);
+            if (existEmail) throw CustomError.badRequest(`Credentials errors please check`);
             
             // 2. Encriptar constraseña
 
