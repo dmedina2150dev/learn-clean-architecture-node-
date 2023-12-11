@@ -3,7 +3,7 @@
  */
 
 import { Request, Response } from 'express';
-import { AuthRepository, CustomError, RegisterUserDto } from '../../domain';
+import { AuthRepository, CustomError, RegisterUser, RegisterUserDto } from '../../domain';
 import { JwtAdapter } from '../../configs';
 import { UserModel } from '../../data/mongodb';
 
@@ -30,14 +30,10 @@ export class AuthController {
 
 		if ( error ) return res.status(400).json({ error });
 
-		this.authRepository.register(registerUserDto!)
-			.then( async (user) => {
-				res.json({
-					user,
-					token: await JwtAdapter.generateToken({ id: user.id })
-				});
-			})
-			.catch( error => this.handleError(error, res));
+		new RegisterUser(this.authRepository)
+			.execute(registerUserDto!)
+			.then(data => res.json(data))
+			.catch(error => this.handleError(error, res))
 	}
 	
 	loginUser = (req: Request, res: Response) => {
@@ -48,7 +44,7 @@ export class AuthController {
 		UserModel.find()
 			.then( (users) => {
 				res.json({
-					// users,
+					users,
 					user: req.body.user
 				});
 			})
