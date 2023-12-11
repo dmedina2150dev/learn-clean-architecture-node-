@@ -4,7 +4,7 @@
  * 
  */
 
-import { CustomError, UserEntity } from "../../domain";
+import { CustomError, UserEntity, UserLoginEntity } from "../../domain";
 
 export class UserMapper {
 
@@ -26,6 +26,25 @@ export class UserMapper {
             name,
             email,
             password,
+            roles
+        );
+    }
+
+    static userEntityFromObjectLogin( object: { [key: string]: any }) {
+        const { id, _id, name, email, roles } = object;
+
+        if (!_id || !id) {
+            throw CustomError.badRequest('Missing id');
+        }
+
+        if (!name) throw CustomError.badRequest('Missing name');
+        if (!email) throw CustomError.badRequest('Missing email');
+        if (!roles) throw CustomError.badRequest('Missing roles');
+
+        return new UserLoginEntity(
+            id || _id,
+            name,
+            email,
             roles
         );
     }

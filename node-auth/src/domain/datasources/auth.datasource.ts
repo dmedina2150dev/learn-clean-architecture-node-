@@ -8,13 +8,13 @@
  * ? Solo definiremos reglas
  */
 
-import { RegisterUserDto } from '../dtos';
-import { UserEntity } from '../entities';
+import { LoginUserDto, RegisterUserDto } from '../dtos';
+import { UserEntity, UserLoginEntity } from '../entities';
 
 export abstract class AuthDatasource {
 
     // TODO: Sera una tarea
-    // abstract login( loginUserDto: LoginUserDto ): Promise<UserEntity>;
+    abstract login( loginUserDto: LoginUserDto ): Promise<UserLoginEntity>;
 
     abstract register( registerUserDto: RegisterUserDto ): Promise<UserEntity>;
 }
